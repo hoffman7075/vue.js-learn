@@ -56,15 +56,14 @@
 </head>
 <body>
   <div id="app" v-cloak>
-    <p>Таблица пользователей из {{ countUsers() }} человек</p>
-    <div class="users_table " v-bind:class="{ hidden: isHidden }">
+    <p>Таблица пользователей из {{ countUsers }} человек</p>
+    <div class="users_table " v-bind:class="{ hidden: isHiddenUsersTable }">
       <div class="users_table__wrap">
 
           <div class="users_table__row" v-for="(user, index) in users" v-bind:key="user.name">
             <div class="users_table__col">
               <div class="users_table__col_wrap">
-                <img v-if="user.imgsrc !== undefined" v-bind:src="user.imgsrc" v-bind:alt="user.name" width="120">
-                <img v-else="user.imgsrc !== undefined" src="https://yt3.ggpht.com/a-/ACSszfHRLg26vw9Rk1Dv1QScDxXDfp3_TAmAlst7CQ=s800-mo-c-c0xffffffff-rj-k-no" :alt="user.name" width="120">
+                <img v-bind:src="user.imgsrc ? user.imgsrc : 'https://yt3.ggpht.com/a-/ACSszfHRLg26vw9Rk1Dv1QScDxXDfp3_TAmAlst7CQ=s800-mo-c-c0xffffffff-rj-k-no'" v-bind:alt="user.name" width="120">
               </div>
             </div>
             <div class="users_table__col">
@@ -79,7 +78,7 @@
         </div>
     </div>
     <button type="button" name="button" v-on:click="toggleUserTable">
-      {{ isHidden ? 'Показать таблицу' : 'Скрыть таблицу' }}
+      {{ buttonTextUsersTable }}
     </button>
   </div>
   <script src="https://ru.vuejs.org/js/vue.js"></script>
@@ -88,7 +87,7 @@
       el: "#app",
       data: function () {
         return {
-          isHidden: false,
+          isHiddenUsersTable: false,
           users: [
             {
               imgsrc: 'https://im0.kommersant.ru/Issues.photo/CORP/2017/09/15/KMO_152927_00258_1_t218_132144.jpg',
@@ -115,15 +114,18 @@
           ]
         }
       },
-      methods: {
-        toggleUserTable: function () {
-          this.isHidden = !this.isHidden
-        },
+      computed: {
         countUsers: function () {
           return this.users.length
+        },
+        buttonTextUsersTable: function () {
+          return this.isHiddenUsersTable ? 'Показать таблицу' : 'Скрыть таблицу'
         }
       },
-      created: function () {
+      methods: {
+        toggleUserTable: function () {
+          this.isHiddenUsersTable = !this.isHiddenUsersTable
+        }
       }
     })
   </script>
