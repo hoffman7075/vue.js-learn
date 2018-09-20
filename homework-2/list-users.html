@@ -1,12 +1,186 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Document</title>
+  <title>Cписиок пользователей | Домашнее задание 2</title>
+  <style>
+  [v-cloak] {
+    display: none;
+  }
+  .users_table {
+      display: table;
+      width: 100%;
+      max-width: 970px;
+    }
+    .hidden {
+      display: none;
+    }
+    .users_table__row {
+      display: table-row;
+    }
+    .users_table__col {
+      border: 1px solid #999999;
+      display: table-cell;
+      vertical-align: middle;
+    }
+    .users_table__col_wrap {
+      padding: 3px 10px;
+    }
+    button {
+      margin-top: 20px;
+      width: 200px;
+      height: 45px;
+      font-family: 'Roboto', sans-serif;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 2.5px;
+      font-weight: 500;
+      color: #000;
+      background-color: #d1d1d1;
+      border: none;
+      border-radius: 45px;
+      box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+      transition: all 0.3s ease 0s;
+      cursor: pointer;
+      }
+
+    button:hover {
+      background-color: #ff5722;
+          box-shadow: 0px 15px 20px rgba(119, 29, 0, 0.73);
+      color: #fff;
+      transform: translateY(-7px);
+    }
+  </style>
 </head>
 <body>
+  <div id="app" v-cloak>
 
+    <div v-if="!isHiddenUsersTable">
+      <users-table v-bind:users="users"></users-table>
+    </div>
+
+    <!-- <p>Таблица пользователей из {{ countUsers }} человек</p> -->
+    <!-- <div class="users_table " v-bind:class="{ hidden: isHiddenUsersTable }">
+      <div class="users_table__wrap">
+
+          <div class="users_table__row" v-for="(user, index) in users" v-bind:key="user.name">
+            <div class="users_table__col">
+              <div class="users_table__col_wrap">
+                <img v-bind:src="user.imgsrc ? user.imgsrc : 'https://yt3.ggpht.com/a-/ACSszfHRLg26vw9Rk1Dv1QScDxXDfp3_TAmAlst7CQ=s800-mo-c-c0xffffffff-rj-k-no'" v-bind:alt="user.name" width="120">
+              </div>
+            </div>
+            <div class="users_table__col">
+              <div class="users_table__col_wrap">
+                <p>
+                  {{ user.name }}
+                </p>
+              </div>
+            </div>
+          </div>
+
+        </div>
+    </div> -->
+    <button type="button" name="button" v-on:click="toggleUserTable">
+      {{ buttonTextUsersTable }}
+    </button>
+
+    <div id="table" class="hidden">
+      <div> <!-- всегда должен быть корневой элемент -->
+        <div>{{ title }}</div>
+        <div class="users_table">
+          <div class="users_table__wrap">
+
+              <div class="users_table__row" v-for="(user, index) in users" v-bind:key="user.name">
+                <div class="users_table__col">
+                  <div class="users_table__col_wrap">
+                    <img v-bind:src="user.imgsrc ? user.imgsrc : 'https://yt3.ggpht.com/a-/ACSszfHRLg26vw9Rk1Dv1QScDxXDfp3_TAmAlst7CQ=s800-mo-c-c0xffffffff-rj-k-no'" v-bind:alt="user.name" width="120">
+                  </div>
+                </div>
+                <div class="users_table__col">
+                  <div class="users_table__col_wrap">
+                    <p>
+                      {{ user.name }}
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <script src="https://ru.vuejs.org/js/vue.js"></script>
+  <script type="text/javascript">
+    var UsersTable = {
+      template: "#table",
+      props: {
+        title: {
+          type: String,
+          default: "Заголовок по умолчанию"
+        },
+        users: {
+          type: Array,
+          required: true
+        }
+      },
+    };
+
+    window.app = new Vue({
+      el: "#app",
+      components: {
+        'users-table': UsersTable
+      },
+      data: function () {
+        return {
+          isHiddenUsersTable: false,
+          title: '',
+          users: [
+            {
+              imgsrc: 'https://im0.kommersant.ru/Issues.photo/CORP/2017/09/15/KMO_152927_00258_1_t218_132144.jpg',
+              name: 'Варламов Александр Юрьевич'
+            },
+            {
+              name: 'Лель Екатерина Васильевна'
+            },
+            {
+              imgsrc: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcShgFmr86jJ_huNtjjiml5XkDMuNeBVbAqIjyBYSJ-9lg8gBT9FlQ',
+              name: 'Грабар Оксана Дмитриевна'
+            },
+            {
+              imgsrc: 'https://kor.ill.in.ua/m/610x385/2108982.jpg',
+              name: 'Шишкина Анна Александровна'
+            },
+            {
+              imgsrc: 'https://images6.cosmopolitan.ru/upload/img_cache/8b5/8b51b2903e7433514ab9209bd099c914_fitted_740x0.jpg',
+              name: 'Цукерберг Марк Валерьевич'
+            },
+            {
+              name: 'Путин Владимир Владимирович'
+            },
+          ]
+        }
+      },
+      computed: {
+        countUsers: function () {
+          return this.users.length
+        },
+        buttonTextUsersTable: function () {
+          return this.isHiddenUsersTable ? 'Показать таблицу' : 'Скрыть таблицу'
+        }
+      },
+      mounted: function () {
+        console.log("Экземпляр смонтирован")
+      },
+      methods: {
+        toggleUserTable: function () {
+          this.isHiddenUsersTable = !this.isHiddenUsersTable
+        }
+      }
+    })
+  </script>
 </body>
 </html>
