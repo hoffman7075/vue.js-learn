@@ -58,7 +58,8 @@
   <div id="app" v-cloak>
 
     <div v-if="!isHiddenUsersTable">
-      <users-table v-bind:users="users"></users-table>
+      <p>Таблица пользователей из {{ countUsers }} человек</p>
+      <users-table v-bind:users="users" v-on:remove="removeUser"></users-table>
     </div>
 
     <!-- <p>Таблица пользователей из {{ countUsers }} человек</p> -->
@@ -87,8 +88,9 @@
     </button>
 
     <div id="table" class="hidden">
-      <div> <!-- всегда должен быть корневой элемент -->
+      <div> <!-- всегда должен существовать корневой элемент -->
         <div>{{ title }}</div>
+        <br>
         <div class="users_table">
           <div class="users_table__wrap">
 
@@ -103,6 +105,11 @@
                     <p>
                       {{ user.name }}
                     </p>
+                  </div>
+                </div>
+                <div class="users_table__col">
+                  <div class="users_table__col_wrap">
+                    <button v-on:click="removeUser(user)">Удалить</button>
                   </div>
                 </div>
               </div>
@@ -127,6 +134,16 @@
           required: true
         }
       },
+      data: function () {
+        return {
+          myvar: 1111,
+        }
+      },
+      methods: {
+        removeUser: function (user) {
+          this.$emit('remove', user.id)
+        }
+      }
     };
 
     window.app = new Vue({
@@ -140,25 +157,31 @@
           title: '',
           users: [
             {
+              id: 0,
               imgsrc: 'https://im0.kommersant.ru/Issues.photo/CORP/2017/09/15/KMO_152927_00258_1_t218_132144.jpg',
               name: 'Варламов Александр Юрьевич'
             },
             {
+              id: 1,
               name: 'Лель Екатерина Васильевна'
             },
             {
+              id: 2,
               imgsrc: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcShgFmr86jJ_huNtjjiml5XkDMuNeBVbAqIjyBYSJ-9lg8gBT9FlQ',
               name: 'Грабар Оксана Дмитриевна'
             },
             {
+              id: 3,
               imgsrc: 'https://kor.ill.in.ua/m/610x385/2108982.jpg',
               name: 'Шишкина Анна Александровна'
             },
             {
+              id: 4,
               imgsrc: 'https://images6.cosmopolitan.ru/upload/img_cache/8b5/8b51b2903e7433514ab9209bd099c914_fitted_740x0.jpg',
               name: 'Цукерберг Марк Валерьевич'
             },
             {
+              id: 5,
               name: 'Путин Владимир Владимирович'
             },
           ]
@@ -178,7 +201,12 @@
       methods: {
         toggleUserTable: function () {
           this.isHiddenUsersTable = !this.isHiddenUsersTable
-        }
+        },
+        removeUser: function (id) {
+          this.users = this.users.filter(function(item) {
+              return item.id !== id;
+          })
+        },
       }
     })
   </script>
