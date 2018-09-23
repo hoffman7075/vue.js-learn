@@ -62,27 +62,6 @@
       <users-table v-bind:users="users" v-on:remove="removeUser"></users-table>
     </div>
 
-    <!-- <p>Таблица пользователей из {{ countUsers }} человек</p> -->
-    <!-- <div class="users_table " v-bind:class="{ hidden: isHiddenUsersTable }">
-      <div class="users_table__wrap">
-
-          <div class="users_table__row" v-for="(user, index) in users" v-bind:key="user.name">
-            <div class="users_table__col">
-              <div class="users_table__col_wrap">
-                <img v-bind:src="user.imgsrc ? user.imgsrc : 'https://yt3.ggpht.com/a-/ACSszfHRLg26vw9Rk1Dv1QScDxXDfp3_TAmAlst7CQ=s800-mo-c-c0xffffffff-rj-k-no'" v-bind:alt="user.name" width="120">
-              </div>
-            </div>
-            <div class="users_table__col">
-              <div class="users_table__col_wrap">
-                <p>
-                  {{ user.name }}
-                </p>
-              </div>
-            </div>
-          </div>
-
-        </div>
-    </div> -->
     <button type="button" name="button" v-on:click="toggleUserTable">
       {{ buttonTextUsersTable }}
     </button>
