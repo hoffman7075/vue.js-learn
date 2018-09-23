@@ -136,7 +136,7 @@
       },
       data: function () {
         return {
-          myvar: 1111,
+          someVar: 'something',
         }
       },
       methods: {
@@ -155,7 +155,37 @@
         return {
           isHiddenUsersTable: false,
           title: '',
-          users: [
+          users: []
+        }
+      },
+      computed: {
+        countUsers: function () {
+          return this.users.length
+        },
+        buttonTextUsersTable: function () {
+          return this.isHiddenUsersTable ? 'Показать таблицу' : 'Скрыть таблицу'
+        }
+      },
+      watch: {
+        users: function () {
+          console.log('В users изменились данные!', this.users)
+        }
+      },
+      mounted: function () {
+        console.log("Экземпляр смонтирован (mounted)");
+        this.loadUsers();
+      },
+      methods: {
+        toggleUserTable: function () {
+          this.isHiddenUsersTable = !this.isHiddenUsersTable
+        },
+        removeUser: function (id) {
+          this.users = this.users.filter(function(item) {
+              return item.id !== id;
+          })
+        },
+        loadUsers: function() {
+          this.users = [
             {
               id: 0,
               imgsrc: 'https://im0.kommersant.ru/Issues.photo/CORP/2017/09/15/KMO_152927_00258_1_t218_132144.jpg',
@@ -186,27 +216,6 @@
             },
           ]
         }
-      },
-      computed: {
-        countUsers: function () {
-          return this.users.length
-        },
-        buttonTextUsersTable: function () {
-          return this.isHiddenUsersTable ? 'Показать таблицу' : 'Скрыть таблицу'
-        }
-      },
-      mounted: function () {
-        console.log("Экземпляр смонтирован")
-      },
-      methods: {
-        toggleUserTable: function () {
-          this.isHiddenUsersTable = !this.isHiddenUsersTable
-        },
-        removeUser: function (id) {
-          this.users = this.users.filter(function(item) {
-              return item.id !== id;
-          })
-        },
       }
     })
   </script>
