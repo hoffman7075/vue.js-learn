@@ -4,9 +4,90 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Document</title>
+  <title>Редактирование пользователя | Домашнее задание 2</title>
+  <style>
+  .hidden {
+    display: none;
+  }
+  </style>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 </head>
 <body>
+  <div id="app">
+    <div v-if="!user" class="alert alert-warning">
+      Загрузка...
+    </div>
+    <user-edit-form v-else v-bind:user="user"></user-edit-form>
+  </div>
 
+  <div id="form" class="hidden">
+    <div>
+      <div class="form-group">
+        <label for="id">ID</label>
+        <input type="text" class="form-control" id="id" placeholder="Введите ID" v-model="user.id">
+      </div>
+      <div class="form-group">
+        <label for="user_name">Имя</label>
+        <input type="text" class="form-control" id="user_name" placeholder="Введите ФИО" v-model="user.name">
+      </div>
+      <div class="form-group">
+        <label for="user_imgsrc">Ссылка на фото</label>
+        <input type="text" class="form-control" id="user_imgsrc" placeholder="Введите путь до изображения" v-model="user.imgsrc">
+      </div>
+      <button type="submit" class="btn btn-primary">Сохранить</button>
+    </div>
+  </div>
+
+<script src="https://ru.vuejs.org/js/vue.js"></script>
+<script type="text/javascript">
+  var UserForm = {
+    template: "#form",
+    props: {
+      user: {
+        type: Object,
+        required: true
+      }
+    },
+    data: function () {
+      return {
+        someVar: 'something',
+      }
+    },
+    methods: {
+
+    }
+  };
+
+  window.app = new Vue({
+    el: "#app",
+    components: {
+      'user-edit-form': UserForm
+    },
+    data: function () {
+      return {
+        user: null
+      }
+    },
+    computed: {
+
+    },
+    watch: {
+
+    },
+    mounted: function () {
+      console.log("Экземпляр смонтирован (mounted)");
+      this.loadUser();
+    },
+    methods: {
+      loadUser: function() {
+        this.user = {
+          id: 0,
+          imgsrc: 'https://im0.kommersant.ru/Issues.photo/CORP/2017/09/15/KMO_152927_00258_1_t218_132144.jpg',
+          name: 'Варламов Александр Юрьевич'
+        }
+      }
+    }
+  })
+</script>
 </body>
 </html>
