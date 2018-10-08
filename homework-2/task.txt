@@ -1,0 +1,2 @@
+Пример с computed/watch: https://plnkr.co/edit/hzb6SX415L0XRN9jqxso?p=preview
+Пример с событиями и формами: https://plnkr.co/edit/6DjaLHAy0vuFIcfw6aXI?p=preview
