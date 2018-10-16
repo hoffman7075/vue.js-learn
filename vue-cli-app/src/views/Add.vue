@@ -7,9 +7,5 @@
 <script>
 export default {
   name: "AddUser"
-}
+};
 </script>
-
-<style>
-
-</style>
