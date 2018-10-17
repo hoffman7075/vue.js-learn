@@ -5,7 +5,7 @@
     <div v-if="!users.length" class="alert alert-warning">
       Загрузка...
     </div>
-    <users-list v-else v-bind:users="users" v-on:remove="removeUser"></users-list>
+    <users-list v-else :users="users" v-on:remove="removeUser" />
 
   </div>
 </template>
@@ -15,9 +15,9 @@ import axios from "axios";
 import UsersList from "@/components/UsersList.vue";
 
 export default {
-  name: "UserList",
+  name: "UsersView",
   component: {
-    UsersList
+    "user-list": UsersList
     // комонент будет тот, который импортировали
   },
   data: function() {
