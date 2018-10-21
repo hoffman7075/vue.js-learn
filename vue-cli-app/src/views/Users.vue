@@ -1,24 +1,23 @@
 <template>
-  <div>
+  <div class="users">
     <h1>Список пользователей</h1>
 
     <div v-if="!users.length" class="alert alert-warning">
       Загрузка...
     </div>
-    <users-list v-else :users="users" v-on:remove="removeUser" />
-
+    <users-list v-else :users="users"/>
   </div>
 </template>
 
 <script>
+// @ is an alias to /src
 import axios from "axios";
 import UsersList from "@/components/UsersList.vue";
 
 export default {
-  name: "UsersView",
-  component: {
-    "user-list": UsersList
-    // комонент будет тот, который импортировали
+  name: "users",
+  components: {
+    "users-list": UsersList
   },
   data: function() {
     return {
@@ -30,9 +29,6 @@ export default {
     this.loadUsers();
   },
   methods: {
-    removeUser: function(user) {
-      this.$emit("remove", user.id);
-    },
     loadUsers: function() {
       axios.get("http://localhost:3004/users").then(response => {
         this.users = response.data;

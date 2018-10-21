@@ -1,29 +1,42 @@
 <template>
   <table class="users_table table table-bordered table-hover">
-    <tr class="users_table__row" v-for="user in users" v-bind:key="user.firstName">
-      <td class="users_table__col">
-        <div class="users_table__col_wrap">
-          <img v-bind:src="user.imgsrc ? user.imgsrc : 'https://yt3.ggpht.com/a-/ACSszfHRLg26vw9Rk1Dv1QScDxXDfp3_TAmAlst7CQ=s800-mo-c-c0xffffffff-rj-k-no'" v-bind:alt="user.firstName" width="120">
-        </div>
-      </td>
-      <td class="users_table__col">
-        <div class="users_table__col_wrap">
-          <p>
-            {{ user.firstName }}
-          </p>
-        </div>
-      </td>
-      <td class="users_table__col">
-        <div class="users_table__col_wrap">
-          <button v-on:click="removeUser(user)" class="btn btn-danger" type="button">Удалить</button>
-        </div>
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <p>Таблица пользователей из {{ countUsers }} человек</p>
-      </td>
-    </tr>
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Имя</th>
+        <th>Фамилия</th>
+        <th>Активен</th>
+        <th>Баланс</th>
+        <th>Email</th>
+        <th>Телефон</th>
+        <th>Зарегистрирован</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr
+        v-for="item in users"
+        :key="item.id">
+        <td>
+          <router-link :to="'/edit/' + item.id">
+            #{{ item.id }}
+          </router-link>
+        </td>
+        <td>{{ item.firstName }}</td>
+        <td>{{ item.lastName }}</td>
+        <td>{{ item.isActive }}</td>
+        <td>{{ item.balance }}</td>
+        <td>{{ item.email }}</td>
+        <td>{{ item.phone }}</td>
+        <td>{{ item.registered }}</td>
+      </tr>
+    </tbody>
+    <tfoot>
+      <tr>
+        <th colspan="8">
+          Всего пользователей: {{ countUsers }}
+        </th>
+      </tr>
+    </tfoot>
   </table>
 </template>
 
@@ -31,8 +44,10 @@
 export default {
   name: "UsersList",
   props: {
-    users: Array,
-    required: true
+    users: {
+      type: Array,
+      required: true
+    }
   },
   computed: {
     countUsers: function() {
@@ -41,21 +56,3 @@ export default {
   }
 };
 </script>
-
-<!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
-h3 {
-  margin: 40px 0 0;
-}
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-li {
-  display: inline-block;
-  margin: 0 10px;
-}
-a {
-  color: #42b983;
-}
-</style>

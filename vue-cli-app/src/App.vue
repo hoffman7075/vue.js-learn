@@ -17,6 +17,9 @@
             <router-link tag="li" to="/add" class="nav-item">
               <a class="nav-link">Добавить пользователя</a>
             </router-link>
+            <router-link tag="li" to="/test" class="nav-item">
+              <a class="nav-link">Тест</a>
+            </router-link>
           </ul>
         </div>
       </nav>
