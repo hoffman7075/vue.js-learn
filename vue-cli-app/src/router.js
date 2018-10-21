@@ -20,6 +20,10 @@ export default new Router({
     {
       path: "/add",
       component: () => import("@/views/Add.vue")
+    },
+    {
+      path: "/edit/:id",
+      component: () => import("@/views/Edit.vue")
     }
   ]
 });
