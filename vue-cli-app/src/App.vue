@@ -8,7 +8,7 @@
 
         <div class="collapse navbar-collapse" id="navbarsExampleDefault">
           <ul class="navbar-nav mr-auto">
-            <router-link tag="li" to="/" class="nav-item">
+            <router-link tag="li" to="/" class="nav-item" exact>
               <a class="nav-link">Главная</a>
             </router-link>
             <router-link tag="li" to="/users" class="nav-item">
@@ -16,9 +16,6 @@
             </router-link>
             <router-link tag="li" to="/add" class="nav-item">
               <a class="nav-link">Добавить пользователя</a>
-            </router-link>
-            <router-link tag="li" to="/test" class="nav-item">
-              <a class="nav-link">Тест</a>
             </router-link>
           </ul>
         </div>

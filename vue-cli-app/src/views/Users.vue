@@ -30,9 +30,10 @@ export default {
   },
   methods: {
     loadUsers: function() {
-      axios.get("http://localhost:3004/users").then(response => {
-        this.users = response.data;
-      });
+      axios
+        .get("http://localhost:3004/users")
+        .then(response => {this.users = response.data;})
+        .catch(error => console.log(error));
     }
   }
 };
