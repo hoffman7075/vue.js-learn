@@ -10,6 +10,8 @@
 
     <user-form v-else :user="user" />
 
+    <button type="button" class="btn" v-on:click="save">Сохранить</button>
+
     <pre>{{ user }}</pre>
 
   </div>
@@ -33,6 +35,9 @@ export default {
   computed: {
     id: function() {
       return this.$route.params.id
+    },
+    url: function() {
+      return "http://localhost:3004/users/" + this.id
     }
   },
   mounted: function() {
@@ -41,8 +46,14 @@ export default {
   methods: {
     loadUser: function() {
       axios
-        .get("http://localhost:3004/users/" + this.id)
+        .get(this.url)
         .then(response => {this.user = response.data;})
+        .catch(error => console.log(error));
+    },
+    save: function() {
+      axios
+        .patch(this.url, this.user)
+        .then(alert("Сохранено"))
         .catch(error => console.log(error));
     }
   }

@@ -62,7 +62,6 @@ export default {
   data: function() {
     localUser: null
     return {
-
     }
   },
   watch: {
