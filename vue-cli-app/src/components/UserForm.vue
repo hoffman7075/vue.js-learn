@@ -53,6 +53,9 @@
 <script>
 export default {
   name: "UserForm",
+  model: {
+    prop: "user"
+  },
   props: {
     user: {
       type: Object,

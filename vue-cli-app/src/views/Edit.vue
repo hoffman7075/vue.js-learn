@@ -8,7 +8,7 @@
       Загрузка...
     </div>
 
-    <user-form v-else :user="user" />
+    <user-form v-else v-model="user" />
 
     <button type="button" class="btn" v-on:click="save">Сохранить</button>
 
