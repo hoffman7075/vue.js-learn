@@ -20,12 +20,11 @@
 <script>
 // @ is an alias to /src
 import axios from "axios";
-import UserForm from "@/components/UserForm.vue";
 
 export default {
   name: "edit",
   components: {
-    "user-form": UserForm
+    "user-form": () => import("@/components/UserForm.vue")
   },
   data: function() {
     return {
@@ -53,7 +52,7 @@ export default {
     save: function() {
       axios
         .patch(this.url, this.user)
-        .then(alert("Сохранено"))
+        .then(this.$router.push("/users"))
         .catch(error => console.log(error));
     }
   }

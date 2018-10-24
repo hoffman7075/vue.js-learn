@@ -17,7 +17,7 @@ import UsersList from "@/components/UsersList.vue";
 export default {
   name: "users",
   components: {
-    "users-list": UsersList
+    "users-list": () => import("@/components/UsersList.vue")
   },
   data: function() {
     return {
