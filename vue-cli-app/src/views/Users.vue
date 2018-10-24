@@ -12,7 +12,6 @@
 <script>
 // @ is an alias to /src
 import axios from "axios";
-import UsersList from "@/components/UsersList.vue";
 
 export default {
   name: "users",
