@@ -1,7 +1,7 @@
 <template>
-  <select v-model="localRowsPerPage">
-    <option value="5">пять</option>
-    <option value="10">десять</option>
+  <select class="form-control" v-model="localRowsPerPage">
+    <option value="5" selected>5</option>
+    <option value="10">10</option>
   </select>
 </template>
 
@@ -19,18 +19,18 @@ export default {
   },
   data: function() {
     return {
-      localRowsPerPage: ""
-    };
-  },
-  created: function() {
-    this.localRowsPerPage = this.rowsPerPage
+      localRowsPerPage: null
+    }
   },
   watch: {
     localRowsPerPage: {
       handler() {
-        this.$emit('change', parseInt(this.localRowsPerPage));
+        this.$emit("change", parseInt(this.localRowsPerPage, 10));
       }
     }
+  },
+  created: function() {
+    this.localRowsPerPage = this.rowsPerPage;
   }
 };
 </script>

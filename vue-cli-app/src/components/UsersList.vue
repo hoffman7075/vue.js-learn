@@ -1,8 +1,10 @@
 <template>
   <div class="wrapper">
-    <div>
-      <rows-select v-model="rowsPerPage" />
-      <p>Выбрано элементов на странице {{ rowsPerPage }}</p>
+    <div class="row">
+      <div class="col-md-4">
+        <rows-select v-model="rowsPerPage" @change="rowsPerPageChange" />
+        <p>Выбрано элементов на странице {{ rowsPerPage }}</p>
+      </div>
     </div>
 
     <table class="users_table table table-bordered table-hover">
@@ -20,7 +22,7 @@
       </thead>
       <tbody>
         <tr
-          v-for="item in users"
+          v-for="item in localUsers"
           :key="item.id">
           <td>
             <router-link :to="'/edit/' + item.id">
@@ -61,13 +63,23 @@ export default {
   },
   data: function() {
     return {
-      rowsPerPage: 0
+      rowsPerPage: 5,
+      localUsers: []
     };
   },
   computed: {
     countUsers: function() {
       return this.users.length;
     }
+  },
+  methods: {
+    rowsPerPageChange: function(count) {
+      this.rowsPerPage = count;
+      this.localUsers = this.users.slice(0, this.rowsPerPage);
+    }
+  },
+  created: function() {
+    this.localUsers = this.users;
   }
 };
 </script>
