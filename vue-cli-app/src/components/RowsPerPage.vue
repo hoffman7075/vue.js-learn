@@ -2,6 +2,7 @@
   <select class="form-control" v-model="localRowsPerPage">
     <option value="5" selected>5</option>
     <option value="10">10</option>
+    <option value="50">50</option>
   </select>
 </template>
 
