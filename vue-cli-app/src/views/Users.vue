@@ -2,10 +2,14 @@
   <div class="users">
     <h1>Список пользователей</h1>
 
-    <div v-if="!users.length" class="alert alert-warning">
+    <div
+      v-if="!users.length"
+      class="alert alert-warning">
       Загрузка...
     </div>
-    <users-list v-else :users="users"/>
+    <users-list
+      v-else
+      :users="users"/>
   </div>
 </template>
 
@@ -14,7 +18,7 @@
 import axios from "axios";
 
 export default {
-  name: "users",
+  name: "Users",
   components: {
     "users-list": () => import("@/components/UsersList.vue")
   },
@@ -31,7 +35,9 @@ export default {
     loadUsers: function() {
       axios
         .get("http://localhost:3004/users")
-        .then(response => {this.users = response.data;})
+        .then(response => {
+          this.users = response.data;
+        })
         .catch(error => console.log(error));
     }
   }

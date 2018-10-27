@@ -2,18 +2,27 @@
   <nav aria-label="table-pagination">
     <ul class="pagination">
       <li class="page-item disabled">
-        <a class="page-link" href="#" tabindex="-1">Previous</a>
+        <a
+          class="page-link"
+          href="#"
+          tabindex="-1">Previous</a>
       </li>
-      <li class="page-item"
-        :class="{active: localCurrentPage === item}"
+      <li
         v-for="item in countPages"
-        :key="item">
-        <a class="page-link" href="javascript:void(0)" @click="currentPageChange">
+        :key="item"
+        :class="{active: localCurrentPage === item}"
+        class="page-item">
+        <a
+          class="page-link"
+          href="javascript:void(0)"
+          @click="currentPageChange">
           {{ item }}
         </a>
       </li>
       <li class="page-item">
-        <a class="page-link" href="#">Next</a>
+        <a
+          class="page-link"
+          href="#">Next</a>
       </li>
     </ul>
   </nav>
@@ -42,6 +51,11 @@ export default {
   data: function() {
     return {
       localCurrentPage: 1
+    };
+  },
+  computed: {
+    countPages: function() {
+      return Math.round(this.countUsers / this.rowsPerPage);
     }
   },
   watch: {
@@ -52,22 +66,17 @@ export default {
     },
     currentPage: {
       handler() {
-        this.localCurrentPage = this.currentPage
+        this.localCurrentPage = this.currentPage;
       }
     }
   },
-  computed: {
-    countPages: function() {
-      return Math.round(this.countUsers / this.rowsPerPage);
-    }
+  created: function() {
+    this.localCurrentPage = this.currentPage;
   },
   methods: {
     currentPageChange: function(page) {
       this.localCurrentPage = parseInt(page.target.innerText, 10);
     }
-  },
-  created: function() {
-    this.localCurrentPage = this.currentPage;
   }
 };
 </script>

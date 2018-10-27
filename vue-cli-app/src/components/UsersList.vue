@@ -2,7 +2,9 @@
   <div class="wrapper">
     <div class="row">
       <div class="col-md-4">
-        <rows-select v-model="rowsPerPage" @change="rowsPerPageChange" />
+        <rows-select
+          v-model="rowsPerPage"
+          @change="rowsPerPageChange" />
         <p>Выбрано элементов на странице {{ rowsPerPage }}</p>
       </div>
     </div>
@@ -50,7 +52,10 @@
     <div class="row">
       <div class="col-md-12">
         <p>Выбрана страница {{ currentPage }}</p>
-        <rows-pagination :countUsers="countUsers" :rowsPerPage="rowsPerPage" v-model="currentPage" />
+        <rows-pagination
+          :count-users="countUsers"
+          :rows-per-page="rowsPerPage"
+          v-model="currentPage" />
       </div>
     </div>
   </div>
@@ -76,11 +81,6 @@ export default {
       localUsers: []
     };
   },
-  watch: {
-    currentPage: function() {
-      this.localUsers = this.users.slice(this.startPos, this.endPos);
-    }
-  },
   computed: {
     countUsers: function() {
       return this.users.length;
@@ -92,15 +92,20 @@ export default {
       return this.currentPage * this.rowsPerPage;
     }
   },
+  watch: {
+    currentPage: function() {
+      this.localUsers = this.users.slice(this.startPos, this.endPos);
+    }
+  },
+  created: function() {
+    this.localUsers = this.users;
+  },
   methods: {
     rowsPerPageChange: function(count) {
       this.rowsPerPage = count;
       this.localUsers = this.users.slice(0, this.rowsPerPage);
       this.currentPage = 1;
     }
-  },
-  created: function() {
-    this.localUsers = this.users;
   }
 };
 </script>
