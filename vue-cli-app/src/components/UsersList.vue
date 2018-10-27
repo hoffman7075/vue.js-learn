@@ -76,9 +76,20 @@ export default {
       localUsers: []
     };
   },
+  watch: {
+    currentPage: function() {
+      this.localUsers = this.users.slice(this.startPos, this.endPos);
+    }
+  },
   computed: {
     countUsers: function() {
       return this.users.length;
+    },
+    startPos: function() {
+      return (this.currentPage - 1) * this.rowsPerPage;
+    },
+    endPos: function() {
+      return this.currentPage * this.rowsPerPage;
     }
   },
   methods: {

@@ -5,6 +5,7 @@
         <a class="page-link" href="#" tabindex="-1">Previous</a>
       </li>
       <li class="page-item"
+        :class="{active: localCurrentPage === item}"
         v-for="item in countPages"
         :key="item">
         <a class="page-link" href="javascript:void(0)" @click="currentPageChange">
