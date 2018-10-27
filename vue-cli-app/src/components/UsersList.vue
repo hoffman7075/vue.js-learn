@@ -46,6 +46,13 @@
         </tr>
       </tfoot>
     </table>
+
+    <div class="row">
+      <div class="col-md-12">
+        <p>Выбрана страница {{ currentPage }}</p>
+        <rows-pagination :countUsers="countUsers" :rowsPerPage="rowsPerPage" v-model="currentPage" />
+      </div>
+    </div>
   </div>
 </template>
 
@@ -53,7 +60,8 @@
 export default {
   name: "UsersList",
   components: {
-    "rows-select": () => import("@/components/RowsPerPage.vue")
+    "rows-select": () => import("@/components/RowsPerPage.vue"),
+    "rows-pagination": () => import("@/components/RowsPagination.vue")
   },
   props: {
     users: {
@@ -63,6 +71,7 @@ export default {
   },
   data: function() {
     return {
+      currentPage: 1,
       rowsPerPage: 5,
       localUsers: []
     };
@@ -76,6 +85,7 @@ export default {
     rowsPerPageChange: function(count) {
       this.rowsPerPage = count;
       this.localUsers = this.users.slice(0, this.rowsPerPage);
+      this.currentPage = 1;
     }
   },
   created: function() {
