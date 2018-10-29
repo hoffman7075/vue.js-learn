@@ -1,6 +1,6 @@
 <template>
   <select
-    v-model="localRowsPerPage"
+    v-model="rowsPerPage"
     class="form-control">
     <option
       value="5"
@@ -22,20 +22,14 @@ export default {
       required: true
     }
   },
-  data: function() {
-    return {
-      localRowsPerPage: null
-    };
-  },
   watch: {
-    localRowsPerPage: {
+    rowsPerPage: {
       handler() {
-        this.$emit("change", parseInt(this.localRowsPerPage, 10));
+        // если событие input, то все родитель видет изменения
+        // если событие change, то родитель не реагирует
+        this.$emit("input", parseInt(this.rowsPerPage, 10));
       }
     }
-  },
-  created: function() {
-    this.localRowsPerPage = this.rowsPerPage;
   }
 };
 </script>
