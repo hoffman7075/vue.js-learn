@@ -4,7 +4,10 @@
 
     <user-form v-model="user" />
 
-    <button type="button" class="btn" v-on:click="save">Сохранить</button>
+    <button
+      type="button"
+      class="btn"
+      @:click="save">Сохранить</button>
 
     <pre>{{ user }}</pre>
   </div>
@@ -46,7 +49,11 @@ export default {
     save: function() {
       axios
         .post(this.url, this.user)
-        .then(this.$router.push("/users"))
+        .then(
+          setTimeout(function() {
+            this.$router.push("/users");
+          }, 200)
+        )
         .catch(error => console.log(error));
     }
   }

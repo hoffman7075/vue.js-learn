@@ -16,9 +16,14 @@
       </router-link>?
     </div>
 
-    <button type="button" class="btn btn-danger" v-on:click="remove">Да</button>
-    <button type="button" class="btn btn-default" v-on:click="cancel">Нет</button>
-
+    <button
+            type="button"
+            class="btn btn-danger"
+            @:click="remove">Да</button>
+    <button
+            type="button"
+            class="btn btn-default"
+            @:click="cancel">Нет</button>
   </div>
 </template>
 
@@ -27,7 +32,7 @@
 import axios from "axios";
 
 export default {
-  name: "edit",
+  name: "Remove",
   components: {
     "user-form": () => import("@/components/UserForm.vue")
   },
@@ -38,10 +43,10 @@ export default {
   },
   computed: {
     id: function() {
-      return this.$route.params.id
+      return this.$route.params.id;
     },
     url: function() {
-      return "http://localhost:3004/users/" + this.id
+      return "http://localhost:3004/users/" + this.id;
     }
   },
   mounted: function() {
@@ -51,7 +56,9 @@ export default {
     loadUser: function() {
       axios
         .get(this.url)
-        .then(response => {this.user = response.data;})
+        .then(response => {
+          this.user = response.data;
+        })
         .catch(error => console.log(error));
     },
     remove: function() {
