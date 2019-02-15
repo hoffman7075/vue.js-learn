@@ -55,7 +55,7 @@ export default {
   },
   computed: {
     countPages: function() {
-      return Math.round(this.countUsers / this.rowsPerPage);
+      return Math.ceil(this.countUsers / this.rowsPerPage);
     }
   },
   watch: {
