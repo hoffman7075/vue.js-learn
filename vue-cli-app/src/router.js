@@ -23,6 +23,10 @@ export default new Router({
     {
       path: "/edit/:id",
       component: () => import("@/views/Edit.vue")
+    },
+    {
+      path: "/remove/:id",
+      component: () => import("@/views/Remove.vue")
     }
   ]
 });

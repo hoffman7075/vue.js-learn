@@ -19,6 +19,7 @@
           <th>Email</th>
           <th>Телефон</th>
           <th>Зарегистрирован</th>
+          <th>Удалить</th>
         </tr>
       </thead>
       <tbody>
@@ -37,6 +38,11 @@
           <td>{{ item.email }}</td>
           <td>{{ item.phone }}</td>
           <td>{{ item.registered }}</td>
+          <td align="center">
+            <router-link :to="'/remove/' + item.id">
+              X
+            </router-link>
+          </td>
         </tr>
       </tbody>
       <tfoot>
