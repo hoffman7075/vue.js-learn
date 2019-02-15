@@ -19,11 +19,11 @@
     <button
             type="button"
             class="btn btn-danger"
-            @:click="remove">Да</button>
+            @click="remove">Да</button>
     <button
             type="button"
             class="btn btn-default"
-            @:click="cancel">Нет</button>
+            @click="cancel">Нет</button>
   </div>
 </template>
 

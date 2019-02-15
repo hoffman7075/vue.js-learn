@@ -7,7 +7,7 @@
     <button
       type="button"
       class="btn"
-      @:click="save">Сохранить</button>
+      @click="save">Сохранить</button>
 
     <pre>{{ user }}</pre>
   </div>
@@ -49,11 +49,7 @@ export default {
     save: function() {
       axios
         .post(this.url, this.user)
-        .then(
-          setTimeout(function() {
-            this.$router.push("/users");
-          }, 200)
-        )
+        .then(this.$router.push("/users"))
         .catch(error => console.log(error));
     }
   }
